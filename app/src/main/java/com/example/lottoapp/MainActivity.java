@@ -1,19 +1,21 @@
 package com.example.lottoapp;
 
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.security.spec.ECField;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,17 +27,31 @@ public class MainActivity extends AppCompatActivity {
 
     private Button raffle;
 
+    int[] numbers = new int[5];
+
+    private TextView textGenerateNumber;
+    private TextView textGenerateNumber2;
+    private TextView textGenerateNumber3;
+    private TextView textGenerateNumber4;
+    private TextView textGenerateNumber5;
+
     private static final int NUMBER_OF_TRIES = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main)  ;
 
         setupView();
     }
 
     private void setupView() {
+        raffle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                randomNumberGenerator();
+            }
+        });
         setupNumberFields();
     }
 
@@ -142,4 +158,17 @@ public class MainActivity extends AppCompatActivity {
         raffle.setEnabled(getNumberListForTextInputEditText().size() == NUMBER_OF_TRIES);
     }
 
+    private void randomNumberGenerator(){
+        final Random myRandom = new Random();
+        for(int i = 0; i<=4; i++){
+            numbers[i] = myRandom.nextInt(51 - 1) + 1;
+        }
+
+        Arrays.sort(numbers);
+        textGenerateNumber.setText(String.valueOf(numbers[0]));
+        textGenerateNumber2.setText(String.valueOf(numbers[1]));
+        textGenerateNumber3.setText(String.valueOf(numbers[2]));
+        textGenerateNumber4.setText(String.valueOf(numbers[3]));
+        textGenerateNumber5.setText(String.valueOf(numbers[4]));
+    }
 }
