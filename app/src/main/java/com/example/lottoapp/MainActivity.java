@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,13 +28,16 @@ public class MainActivity extends AppCompatActivity {
 
     private Button raffle;
 
-    int[] numbers = new int[5];
+    private NumberChecker playedNumbers;
+    private int[] numbers = new int[5];
 
     private TextView textGenerateNumber;
     private TextView textGenerateNumber2;
     private TextView textGenerateNumber3;
     private TextView textGenerateNumber4;
     private TextView textGenerateNumber5;
+
+    private ImageView trophy;
 
     private static final int NUMBER_OF_TRIES = 5;
 
@@ -48,7 +52,13 @@ public class MainActivity extends AppCompatActivity {
     private void setupView() {
         setupNumberFields();
         setupTextGenerate();
-        raffle.setOnClickListener(v -> randomNumberGenerator());
+        raffle.setOnClickListener(v -> {
+            randomNumberGenerator();
+            if (playedNumbers.allEquals(numbers)) {
+                trophy = findViewById(R.id.winner_trophy);
+                trophy.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void setupTextGenerate() {
@@ -83,14 +93,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean wasNumberAlreadyInserted(int number) {
-        int numberOfInsertions = 0;
-        ArrayList<Integer> numbers = getNumberListForTextInputEditText();
-        for (int i = 0; i < numbers.size(); i++) {
-            if (numbers.get(i) == number) {
-                numberOfInsertions++;
-            }
-        }
-        return numberOfInsertions >= 2;
+        int[] numbers = getNumberListForTextInputEditText()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .toArray();
+
+        playedNumbers = new NumberChecker(numbers);
+        return playedNumbers.exists(number);
     }
 
     private Integer getIntNumberFromStringNumber(String number) {
@@ -98,11 +107,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isNumberValid(int number) {
-        if (number >= 1 && number <= 50) {
-            return true;
-        } else {
-            return false;
-        }
+        return number >= 1 && number <= 50;
     }
 
     private void setupTextWatcher(View view) {
