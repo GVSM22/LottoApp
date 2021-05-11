@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">LottoApp</string>
     <string name="make_game">Faça seu jogo:</string>
-    <string name="placeholder">Teste</string>
+    <string name="placeholder">0</string>
     <string name="raffle">Sorteio</string>
+
+    <string name="invalid_number">Número inválido</string>
+    <string name="number_already_inserted">Número já inserido</string>
 </resources>
