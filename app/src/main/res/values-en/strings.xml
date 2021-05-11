@@ -4,4 +4,7 @@
     <string name="placeholder">0</string>
     <string name="result">Result:</string>
     <string name="raffle">Raffle</string>
+
+    <string name="invalid_number">Invalid number</string>
+    <string name="number_already_inserted">Number already inserted</string>
 </resources>

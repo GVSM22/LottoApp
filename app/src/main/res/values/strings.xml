@@ -2,6 +2,12 @@
     <string name="app_name">LottoApp</string>
     <string name="make_game">Faça seu jogo:</string>
     <string name="placeholder">0</string>
+<<<<<<< HEAD
     <string name="result">Resultado:</string>
+=======
+>>>>>>> f5130c77e984f6695651a8f1f391e131f35dba58
     <string name="raffle">Sorteio</string>
+
+    <string name="invalid_number">Número inválido</string>
+    <string name="number_already_inserted">Número já inserido</string>
 </resources>
