@@ -51,4 +51,18 @@ public class NumberCheckerTest {
         NumberChecker numberChecker = new NumberChecker(winningNumbers);
         assert(numberChecker.numOfMatches(new int[]{5, 10, 15}) == 1);
     }
+
+    @Test
+    public void gameNotReady() {
+        int[] winningNumbers = new int[]{1, 2, 5};
+        NumberChecker numberChecker = new NumberChecker(winningNumbers);
+        assertFalse(numberChecker.numbersReady());
+    }
+
+    @Test
+    public void gameReady() {
+        int[] winningNumbers = new int[]{1, 2, 5, 3, 4};
+        NumberChecker numberChecker = new NumberChecker(winningNumbers);
+        assert(numberChecker.numbersReady());
+    }
 }
