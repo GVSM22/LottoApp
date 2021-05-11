@@ -1,19 +1,21 @@
 package com.example.lottoapp;
 
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.security.spec.ECField;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +26,14 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText fifthNumber;
 
     private Button raffle;
+
+    int[] numbers = new int[5];
+
+    private TextView textGenerateNumber;
+    private TextView textGenerateNumber2;
+    private TextView textGenerateNumber3;
+    private TextView textGenerateNumber4;
+    private TextView textGenerateNumber5;
 
     private static final int NUMBER_OF_TRIES = 5;
 
@@ -37,6 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupView() {
         setupNumberFields();
+        setupTextGenerate();
+        raffle.setOnClickListener(v -> randomNumberGenerator());
+    }
+
+    private void setupTextGenerate() {
+        textGenerateNumber = findViewById(R.id.resultFirstNumber);
+        textGenerateNumber2 = findViewById(R.id.resultSecondNumber);;
+        textGenerateNumber3 = findViewById(R.id.resultThirdNumber);;
+        textGenerateNumber4 = findViewById(R.id.resultFourthNumber);;
+        textGenerateNumber5 = findViewById(R.id.resultFifthNumber);;
     }
 
     private void setupNumberFields() {
@@ -65,15 +85,15 @@ public class MainActivity extends AppCompatActivity {
     private boolean wasNumberAlreadyInserted(int number) {
         int numberOfInsertions = 0;
         ArrayList<Integer> numbers = getNumberListForTextInputEditText();
-        for(int i = 0; i < numbers.size(); i++){
-            if (numbers.get(i) == number){
+        for (int i = 0; i < numbers.size(); i++) {
+            if (numbers.get(i) == number) {
                 numberOfInsertions++;
             }
         }
         return numberOfInsertions >= 2;
     }
 
-    private Integer getIntNumberFromStringNumber(String number){
+    private Integer getIntNumberFromStringNumber(String number) {
         return Integer.parseInt(number);
     }
 
@@ -85,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setupTextWatcher(View view){
-        if (view != null){
+    private void setupTextWatcher(View view) {
+        if (view != null) {
             TextInputEditText textInputEditText = (TextInputEditText) view;
             textInputEditText.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -96,17 +116,17 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if(textInputEditText.getText() != null){
+                    if (textInputEditText.getText() != null) {
                         try {
                             int number = getIntNumberFromStringNumber(textInputEditText.getText().toString());
                             if (!isNumberValid(number)) {
                                 showToast(R.string.invalid_number);
                                 textInputEditText.getText().clear();
-                            } else if (wasNumberAlreadyInserted(number)){
+                            } else if (wasNumberAlreadyInserted(number)) {
                                 showToast(R.string.number_already_inserted);
                                 textInputEditText.getText().clear();
                             }
-                        } catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                         validateRaffleButtonConditions();
@@ -121,25 +141,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private ArrayList<Integer> getNumberListForTextInputEditText(){
+    private ArrayList<Integer> getNumberListForTextInputEditText() {
         return getNumberListForTextInputEditText(firstNumber, secondNumber, thirdNumber, fourthNumber, fifthNumber);
     }
 
-    private ArrayList<Integer> getNumberListForTextInputEditText(TextInputEditText... textInputEditTexts){
+    private ArrayList<Integer> getNumberListForTextInputEditText(TextInputEditText... textInputEditTexts) {
         ArrayList<Integer> numbers = new ArrayList<>();
-        for (TextInputEditText textInputEditText: textInputEditTexts){
+        for (TextInputEditText textInputEditText : textInputEditTexts) {
             try {
                 Integer number = getIntNumberFromStringNumber(textInputEditText.getText().toString());
                 numbers.add(number);
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return numbers;
     }
 
-    private void validateRaffleButtonConditions(){
+    private void validateRaffleButtonConditions() {
         raffle.setEnabled(getNumberListForTextInputEditText().size() == NUMBER_OF_TRIES);
     }
 
+    private void randomNumberGenerator() {
+        final Random myRandom = new Random();
+        for (int i = 0; i <= 4; i++) {
+            numbers[i] = myRandom.nextInt(51 - 1) + 1;
+        }
+
+        Arrays.sort(numbers);
+        textGenerateNumber.setText(String.valueOf(numbers[0]));
+        textGenerateNumber2.setText(String.valueOf(numbers[1]));
+        textGenerateNumber3.setText(String.valueOf(numbers[2]));
+        textGenerateNumber4.setText(String.valueOf(numbers[3]));
+        textGenerateNumber5.setText(String.valueOf(numbers[4]));
+    }
 }
