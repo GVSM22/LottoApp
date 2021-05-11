@@ -3,4 +3,7 @@
     <string name="make_game">Make your game:</string>
     <string name="placeholder">Test</string>
     <string name="raffle">Raffle</string>
+
+    <string name="invalid_number">Invalid number</string>
+    <string name="number_already_inserted">Number already inserted</string>
 </resources>
