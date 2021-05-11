@@ -7,4 +7,5 @@
     <string name="invalid_number">Invalid number</string>
     <string name="number_already_inserted">Number already inserted</string>
     <string name="winner_trophy">winner trophy</string>
+    <string name="reset">Reset</string>
 </resources>
