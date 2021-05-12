@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     if (playedNumbers.allEquals(numbers)) {
                         trophy = findViewById(R.id.winner_trophy);
                         trophy.setVisibility(View.VISIBLE);
+                        trophy.setOnClickListener(i -> trophy.setVisibility(View.INVISIBLE));
                     }
                     String resetString = getString(R.string.reset);
                     raffle.setText(resetString);
