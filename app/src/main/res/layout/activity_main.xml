@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/circle_shape">
+    android:background="@drawable/background">
 
     <TextView
         android:id="@+id/title"
@@ -17,7 +17,7 @@
         android:layout_marginStart="30dp"
         android:text="@string/app_name"
         android:textSize="70sp"
-        android:textColor="#94B6D2" />
+        android:textColor="#5aa109" />
 
     <TextView
         android:id="@+id/faca_jogo"
@@ -219,14 +219,14 @@
 
     <ImageView
         android:id="@+id/winner_trophy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/resultThirdNumber"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/faca_jogo"
+        app:layout_constraintBottom_toBottomOf="@id/resultThirdNumber"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/winner_trophy"
         android:visibility="invisible"
+        android:src="@drawable/trophy"
         android:contentDescription="@string/winner_trophy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
