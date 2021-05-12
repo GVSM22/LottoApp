@@ -23,4 +23,8 @@ public class NumberChecker {
                 .filter(i -> Arrays.stream(resultNumbers).anyMatch(v -> v == i))
                 .count();
     }
+
+    public boolean numbersReady() {
+        return gameNumbers.length == 5;
+    }
 }

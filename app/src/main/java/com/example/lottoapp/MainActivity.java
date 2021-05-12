@@ -53,10 +53,24 @@ public class MainActivity extends AppCompatActivity {
         setupNumberFields();
         setupTextGenerate();
         raffle.setOnClickListener(v -> {
-            randomNumberGenerator();
-            if (playedNumbers.allEquals(numbers)) {
-                trophy = findViewById(R.id.winner_trophy);
-                trophy.setVisibility(View.VISIBLE);
+            if (playedNumbers.numbersReady()) {
+                String raffleString = getString(R.string.raffle);
+                if (raffle.getText().toString().equals(raffleString)) {
+                    randomNumberGenerator();
+                    if (playedNumbers.allEquals(numbers)) {
+                        trophy = findViewById(R.id.winner_trophy);
+                        trophy.setVisibility(View.VISIBLE);
+                    }
+                    String resetString = getString(R.string.reset);
+                    raffle.setText(resetString);
+                } else {
+                    String placeholder = getString(R.string.placeholder);
+                    textGenerateNumber.setText(placeholder);
+                    textGenerateNumber2.setText(placeholder);
+                    textGenerateNumber3.setText(placeholder);
+                    textGenerateNumber4.setText(placeholder);
+                    textGenerateNumber5.setText(placeholder);
+                }
             }
         });
     }
