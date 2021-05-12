@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -189,10 +190,33 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Arrays.sort(numbers);
+
+        AlphaAnimation fadeIn = new AlphaAnimation(0.0f , 1.0f);
+
         textGenerateNumber.setText(String.valueOf(numbers[0]));
+        textGenerateNumber.startAnimation(fadeIn);
+        fadeIn.setDuration(1200);
+        fadeIn.setFillAfter(true);
+
         textGenerateNumber2.setText(String.valueOf(numbers[1]));
+        textGenerateNumber2.startAnimation(fadeIn);
+        fadeIn.setDuration(1200);
+        fadeIn.setFillAfter(true);
+
         textGenerateNumber3.setText(String.valueOf(numbers[2]));
+        textGenerateNumber3.startAnimation(fadeIn);
+        fadeIn.setDuration(1200);
+        fadeIn.setFillAfter(true);
+
         textGenerateNumber4.setText(String.valueOf(numbers[3]));
+        textGenerateNumber4.startAnimation(fadeIn);
+        fadeIn.setDuration(1200);
+        fadeIn.setFillAfter(true);
+
         textGenerateNumber5.setText(String.valueOf(numbers[4]));
+        textGenerateNumber5.startAnimation(fadeIn);
+        fadeIn.setDuration(1200);
+        fadeIn.setFillAfter(true);
+
     }
 }
